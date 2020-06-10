@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title>Alpho</title>
+        <meta charset="utf-8">
+        <meta viewport="width=device-width, user-scalable=no, initial-scale=1.0">
+        <style>
+	        html, body {
+	            padding: 0px;
+	            margin: 0px;
+	        }
+	        
+	        #containerAlphabatButtons {
+	            max-width: 900px;
+	            min-width: 400px;
+	            position: absolute;
+	            top: 50%;
+	            left: 50%;
+	            padding-left: 20px;
+	            padding-right: 20px;
+	            transform: translate(-50%, -50%);
+	            display: flex;
+	            flex-direction: row;
+	            flex-wrap: wrap;
+	        }
+	        
+	        .letter {
+	            background-color: #90ff5f;
+	            color: rgb(45, 93, 6);
+	            padding: 20px;
+	            font-size: 20px;
+	            font-family: fantasy;
+	            border-radius: 5px;
+	            margin: 10px;
+	            box-shadow: 0px 0px 2px 1px #cccccc;
+	            cursor: pointer;
+	            transition: all 0.5s ease-out;
+	        }
+	        
+	        .letter:active {
+	            background-color: #39781e;
+	        }
+	    </style>
+	</head>
+	<body>
+	    <div id="containerAlphabatButtons"></div>
+	    <script>
+		    function loopAllAlphabet(callbackFunction) {
+		        for (var i = 65; i <= 90; i++) callbackFunction(String.fromCharCode(i));
+		    }
+		    var containerAlphabatButtons = document.getElementById("containerAlphabatButtons");
+		    loopAllAlphabet(function( letter ) {
+		        containerAlphabatButtons.innerHTML += '<div class="letter" onclick="sendDataLetter(this);" data-char="' + letter + '">' + letter.toLowerCase() + '</div>';
+		    });
+
+		    this.sendDataLetter = function sendDataLetter( element ) {
+		        var xmlhttp = new XMLHttpRequest();
+		        var data = element.getAttribute("data-char");
+		        xmlhttp.open("GET","?data=" + data, true);
+		        xmlhttp.send(null);
+		    };
+	    </script>
+	</body>
+</html>
